@@ -37,10 +37,10 @@ jobs:
           command: |
             echo "hello world" > dir/baz/output.txt
       - persist_to_workspace:
-          root: dir
+          root: ~/dir
           paths:
             - foo/bar
-            - baz
+            - baz/output.txt
 
   print_output_file:
     docker:
@@ -48,10 +48,10 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: dir/baz
+          at: ~/dir/baz
       - run:
           name: "printing file"
-          command: cat dir/baz/output.txt
+          command: cat output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
