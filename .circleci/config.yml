@@ -27,6 +27,32 @@ jobs:
           name: Print Name
           command: echo $MY_AUTHOR_VAR
 
+  save_hello_world_output:
+    docker:
+      - image: cimg/base:stable
+    steps"
+      - checkout
+      - run:
+          name: "output hello world"
+          command: |
+            echo "hello world" > dir/baz/output.txt
+      - persist_to_workspace:
+          root: dir
+          paths:
+            - foo/bar
+            - baz
+
+  print_output_file:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - attach_workspace:
+          at: dir/baz/output.txt
+      - run:
+          name: "printing file"
+          command: echo output.txt
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
