@@ -12,7 +12,7 @@ defaults:
 
 commands:
   print_pipeline_id:
-   description: prints out the circle workflow id
+    description: prints out the circle workflow id
     steps:
       - run:
           name: print workflow id
