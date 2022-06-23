@@ -10,6 +10,15 @@ defaults:
     - image: cimg/base:stable
   working_directory: ~/project
 
+commands:
+  print_pipeline_id:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: print workflow id
+          command: echo $CIRCLE_WORKFLOW_ID
+
 jobs:
   print-my-name:
     <<: *something
@@ -36,6 +45,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+      - print_pipeline_id
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
