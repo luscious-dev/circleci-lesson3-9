@@ -35,11 +35,10 @@ jobs:
       - run:
           name: "output hello world"
           command: |
-            echo "hello world" > dir/baz/output.txt
+            echo "hello world" > ~/dir/baz/output.txt
       - persist_to_workspace:
           root: ~/dir
           paths:
-            - foo/bar
             - baz/output.txt
 
   print_output_file:
