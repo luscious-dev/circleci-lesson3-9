@@ -30,7 +30,7 @@ jobs:
   save_hello_world_output:
     docker:
       - image: cimg/base:stable
-    steps"
+    steps:
       - checkout
       - run:
           name: "output hello world"
