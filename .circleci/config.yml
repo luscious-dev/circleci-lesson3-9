@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: dir/baz/output.txt
+          at: dir/baz
       - run:
           name: "printing file"
           command: cat output.txt
