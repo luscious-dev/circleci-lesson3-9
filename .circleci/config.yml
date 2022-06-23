@@ -61,5 +61,8 @@ workflows:
       - print-my-name
   print-output-workflow:
     jobs:
-      - print_output_file
+      - print_output_file:
+          requires:
+            - save_hello_world_output
+
     
