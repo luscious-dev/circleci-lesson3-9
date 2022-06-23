@@ -64,5 +64,5 @@ workflows:
       - print-my-name
   print-output-workflow:
     jobs:
-      - print_out_file
+      - print_output_file
     
