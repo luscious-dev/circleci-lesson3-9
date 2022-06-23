@@ -51,7 +51,7 @@ jobs:
           at: dir/baz/output.txt
       - run:
           name: "printing file"
-          command: echo output.txt
+          command: cat output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
