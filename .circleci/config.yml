@@ -35,11 +35,11 @@ jobs:
       - run:
           name: "output hello world"
           command: |
-            echo "hello world" > ~/dir/baz/output.txt
+            echo "hello world" > ~/output.txt
       - persist_to_workspace:
-          root: ~/dir
+          root: ~/
           paths:
-            - baz/output.txt
+            - output.txt
 
   print_output_file:
     docker:
@@ -47,7 +47,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/dir/baz
+          at: ~/
       - run:
           name: "printing file"
           command: cat output.txt
