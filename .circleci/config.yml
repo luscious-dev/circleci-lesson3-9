@@ -33,7 +33,5 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-
-  print-my-name-workflow:
-    jobs:
       - print-my-name
+    
