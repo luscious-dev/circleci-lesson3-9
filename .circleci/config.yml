@@ -31,7 +31,6 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - checkout
       - run:
           name: "output hello world"
           command: |
@@ -45,7 +44,6 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - checkout
       - attach_workspace:
           at: ~/
       - run:
