@@ -18,9 +18,9 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run: echo "hello world" > ~/dir/wale/output.txt
+      - run: echo "hello world" > ~/output.txt
       - persist_to_workspace:
-          root: ~/dir/wale
+          root: ~/
           paths:
             - output.txt
 
@@ -29,8 +29,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/dir/wale
-      - run: cat output.txt
+          at: ~/
+      - run: cat ~/output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
