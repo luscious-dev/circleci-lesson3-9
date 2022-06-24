@@ -50,12 +50,12 @@ jobs:
   test_error_job:
     docker:
       - image: cimg/base:stable
-      steps:
-        - run: return 1
-        - run:
-            name: on error
-            command: echo "There is an error bro!"
-            when: on_fail
+    steps:
+      - run: return 1
+      - run:
+          name: on error
+          command: echo "There is an error bro!"
+          when: on_fail
 
 
 # Invoke jobs via workflows
