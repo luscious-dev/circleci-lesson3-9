@@ -35,7 +35,11 @@ jobs:
       - checkout
       - run:
           name: Print Name
-          command: exit 1
+          command: return 1
+      - run: 
+          name: when fail
+          command: echo $PWD
+          when: on_fail
 
  
 
