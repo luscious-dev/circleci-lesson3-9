@@ -31,19 +31,19 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - run: echo $PWD > ~/output.txt
+      - run: echo $PWD > ~/home/circleci/project/test/output.txt
       - persist_to_workspace:
-          root: ~/
+          root: ~/home/circleci/project
           paths:
-            - output.txt
+            - test/output.txt
 
   print_output_file:
     docker:
       - image: cimg/base:stable
     steps:
       - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
+          at: ~/home/circleci/project/test
+      - run: cat output.txt
       - print_pipeline_id
 
 # Invoke jobs via workflows
