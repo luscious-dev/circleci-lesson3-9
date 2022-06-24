@@ -35,13 +35,7 @@ jobs:
       - checkout
       - run:
           name: Print Name
-          command: return 1
-      - run: 
-          name: when fail
-          command: echo $PWD
-          when: on_fail
-
- 
+          command: echo Olawale 
 
   print_output_file:
     docker:
@@ -53,11 +47,23 @@ jobs:
       - print_pipeline_id
       - when: on_fail
 
+  test_error_job:
+    docker:
+      - image: cimg/base:stable
+      steps:
+        - run: return 1
+        - run:
+            name: on error
+            command: echo "There is an error bro!"
+            when: on_fail
+
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   print-output-workflow:
     jobs:
+      - test_error_job
       - save_hello_world_output
       - print_output_file:
           requires:
