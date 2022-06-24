@@ -35,7 +35,7 @@ jobs:
       - checkout
       - run:
           name: Print Name
-          command: return 1
+          command: exit 1
 
  
 
@@ -54,8 +54,9 @@ jobs:
 workflows:
   print-output-workflow:
     jobs:
-      - print-my-name
       - save_hello_world_output
-      - print_output_file
+      - print_output_file:
+          requires:
+            - save_hello_world_output
 
     
