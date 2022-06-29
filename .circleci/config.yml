@@ -90,5 +90,6 @@ workflows:
   print-output-workflow:
     jobs:
       - aws-cli-cred-setup
+          context: aws
 
     
