@@ -2,6 +2,8 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@2.0.3
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 defaults: 
@@ -19,6 +21,14 @@ commands:
           command: echo $CIRCLE_WORKFLOW_ID
 
 jobs:
+  aws-cli-cred-setup:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_REGION
+
   save_hello_world_output:
     docker:
       - image: cimg/base:stable
@@ -28,6 +38,21 @@ jobs:
           root: ~/
           paths:
             - output.txt
+  
+  create_inventory_file:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - run: touch inventory
+      - run: echo [all] > inventory
+      - run: aws ec2 describe-instances \
+          --query 'Reservations[*].Instances[*].PublicIpAddress' \
+          --filters "Name=tag:Project,Values=udacity" \
+          --output text >> inventory
+
+  save_inventory_file:
+    docker:
+      - image: cimg/base:stable
 
   print-my-name:
     <<: *something
