@@ -28,6 +28,7 @@ jobs:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           aws-region: AWS_REGION
+          aws-session-token: AWS_SESSION_TOKEN
 
   save_hello_world_output:
     docker:
@@ -88,10 +89,6 @@ jobs:
 workflows:
   print-output-workflow:
     jobs:
-      - test_error_job
-      # - save_hello_world_output
-      # - print_output_file:
-      #     requires:
-      #       - save_hello_world_output
+      - aws-cli-cred-setup
 
     
